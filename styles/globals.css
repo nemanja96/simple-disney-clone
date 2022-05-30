@@ -4,6 +4,8 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background: #13151f;
+    color: white;
 }
 
 a {
@@ -13,4 +15,129 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.navbar{
+  height: 70px;
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account-info{
+  display: flex;
+}
+
+.navbar .avatar{
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  border-radius: 50%;
+}
+
+.main-video{
+  width: 80%;
+  height: 60vh;
+  margin: 50px auto;
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 30px;
+}
+
+.main-video-wrapper{
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 30px;
+}
+
+.main-video-info{
+  width: 50%;
+  margin: 50px;
+}
+
+.main-video-info h2{
+  font-size: 3rem;
+  margin: 0;
+}
+
+.main-video-info p{
+  margin: 0;
+  padding-top: 10px;
+  font-weight: 600;
+}
+
+.main-video-info button{
+  width: 200px;
+  height: 50px;
+  border: none;
+  margin-top: 20px;
+  background: orangered;
+  color: white;
+  border-radius: 50px;
+  font-size: 1rem;
+  transition: .3s opacity;
+  cursor: pointer;
+}
+
+.main-video-info button:hover{
+  opacity: 0.8;
+}
+
+.video-feed{
+  padding: 0 20px;
+}
+
+.card{
+  width: 32%;
+  height: 250px;
+  border-radius: 5%;
+  margin: 0.667%;
+  filter: drop-shadow(5px 5px 10px #000);
+}
+
+.video-image{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.info{
+  position:relative;
+  margin-top: 20%;
+  margin-left: 50px;
+  max-width: 50%;
+  font-size: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+}
+
+.info button{
+  width: 150px;
+  height: 50px;
+  margin-top: 20px;
+  background: #13151f;
+  color: white;
+  border: none;
+}
+
+.video{
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  height: 70%;
+}
+
+.single-video{
+  height: 100vh;
+  display: flex;
+  align-items: center;
 }

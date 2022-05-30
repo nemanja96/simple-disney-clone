@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GraphQLClient, gql } from 'graphql-request';
+import YouTube from 'react-youtube';
 
 export const getServerSideProps = async (pageContext) => {
 
@@ -47,19 +48,30 @@ export const getServerSideProps = async (pageContext) => {
 }
 
 function Video({video}) {
-    console.log(video)
-  return (
-    <div>
-        <h1>{video?.title}</h1>
-        <h2>{video?.description}</h2>  
+    
+    const [watching, setWatching] = useState(false);
 
-        {
-            video?.tags.map(tag => (
-                <p>{tag}</p>
-            ))
-        }  
-    </div>
-  )
+  return (
+        <div className='single-video' onClick={() => watching ? setWatching(false) : null}>
+            {!watching && <img className="video-image" src={video?.thumbnail.url} alt={video?.title} />}
+            {!watching && <div className="info">
+                <p>{video.tags.join(', ')}</p>
+                <p>{video.description}</p>
+                <a href="/">Go back</a><br/>
+                <button className="video-overlay" onClick={() => {
+                    watching ? setWatching(false) : setWatching(true)
+                }}>PLAY</button>
+            </div> }
+            {watching && (
+                <video width="100%" controls autoPlay className="video">
+                    <source src={video?.mp4.url} type="video/mp4" />
+                </video>
+            )}
+            <div className="info-footer" >
+                
+            </div>
+        </div>
+    )
 }
 
 export default Video
