@@ -71,11 +71,6 @@ export default function Home({videos, account}) {
     return videos.filter(video => video.seen == false || video.seen == null)
   }
 
-  const showVideo = (videos) => {
-    const videoList = randomVideo(videos);
-    return videoList
-  }
- 
   return (
     <>
       <Head>
