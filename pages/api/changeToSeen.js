@@ -1,6 +1,7 @@
 import { GraphQLClient } from "graphql-request";
 
 export default async ({body}, res) => {
+    console.log(body);
 
     const url = "https://api-eu-central-1.graphcms.com/v2/cl3kcl26j9yxq01xp3effae70/master";
     const graphcms = new GraphQLClient(url, {
@@ -12,8 +13,6 @@ export default async ({body}, res) => {
             mutation($slug: String!) {
                 updateVideo(where: { slug: $slug }, data: { seen: true }) {
                     id,
-                    title,
-                    seen
                 }
             }
         `,
@@ -22,11 +21,11 @@ export default async ({body}, res) => {
 
     await graphcms.request(
         `
-        mutation publishVideo($slug: String) {
-            publishVideo(where: { slug : $slug }, to: PUBLISHED) {
-                slug
+            mutation publishVideo($slug: String) {
+                publishVideo(where: { slug : $slug }, to: PUBLISHED) {
+                    slug
+                }
             }
-        }
         `,
         { slug: body.slug }
     )

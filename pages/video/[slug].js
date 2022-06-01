@@ -28,6 +28,9 @@ export const getServerSideProps = async (pageContext) => {
           },
           mp4 {
             url
+          },
+          backgroundImage {
+              url
           }
         }
       }
@@ -62,16 +65,17 @@ function Video({video}) {
     const [watching, setWatching] = useState(false);
 
   return (
-        <div className='single-video' onClick={() => watching ? setWatching(false) : null}>
-            {!watching && <img className="video-image" src={video?.thumbnail.url} alt={video?.title} />}
+        <div className='single-video' style={{ backgroundImage: "url(" + video?.backgroundImage.url + ")" }} onClick={() => watching ? setWatching(false) : null}>
+            {!watching && <div className="background"></div>}
             {!watching && <div className="info">
-                <p>{video.tags.join(', ')}</p>
+                <h3>{video?.tags.join(', ')}</h3>
+                <h1>{video.title}</h1>
                 <p>{video.description}</p>
-                <a href="/">Go back</a><br/>
-                <button className="video-overlay" onClick={() => {
+                <a className="video-overlay" onClick={() => {
                     changeToSeen(video?.slug)
                     watching ? setWatching(false) : setWatching(true)
-                }}>PLAY</button>
+                }}>Play the trailer</a>
+                <a href="/" className='go-back'>Go back</a><br/>
             </div> }
             {watching && (
                 <video width="100%" controls autoPlay className="video">
