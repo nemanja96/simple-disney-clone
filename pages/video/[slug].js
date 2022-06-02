@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { GraphQLClient, gql } from 'graphql-request';
 import Link from 'next/link';
+import Head from 'next/head';
 
 export const getServerSideProps = async (pageContext) => {
 
@@ -55,6 +56,13 @@ function Video({video}) {
     const [watching, setWatching] = useState(false);
 
     return (
+         <>
+            <Head>
+                <title>{video.title} - Nemanja Radivojevic</title>
+                <meta name="description" content="Simple Disney Clone" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+        
             <div className='single-video' style={{ backgroundImage: "url(" + video?.backgroundImage.url + ")" }} onClick={() => watching ? setWatching(false) : null}>
                 {!watching && <div className="background"></div>}
                 {!watching && <div className="info">
@@ -72,7 +80,8 @@ function Video({video}) {
                     </video>
                 )}
             </div>
-        )
+        </>
+    )
 }
 
 export default Video
