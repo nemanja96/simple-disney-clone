@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { GraphQLClient, gql } from 'graphql-request';
-import YouTube from 'react-youtube';
+import Link from 'next/link';
 
 export const getServerSideProps = async (pageContext) => {
 
@@ -13,27 +13,27 @@ export const getServerSideProps = async (pageContext) => {
     })
 
     const query = gql`
-    query($pageSlug: String!) {
-        video(where: {
-          slug: $pageSlug
-        }) {
-            id,
-          title,
-          description,
-          seen,
-          slug,
-          tags,
-          thumbnail {
-            url
-          },
-          mp4 {
-            url
-          },
-          backgroundImage {
-              url
-          }
+        query($pageSlug: String!) {
+            video(where: {
+            slug: $pageSlug
+            }) {
+                id,
+            title,
+            description,
+            seen,
+            slug,
+            tags,
+            thumbnail {
+                url
+            },
+            mp4 {
+                url
+            },
+            backgroundImage {
+                url
+            }
+            }
         }
-      }
     `
 
     const variables = {
@@ -50,43 +50,29 @@ export const getServerSideProps = async (pageContext) => {
     }
 }
 
-    const changeToSeen = async (slug) => {
-        await fetch('/api/changeToSeen', {
-            method: "POST",
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify({ slug })
-        })
-    }
-
 function Video({video}) {
     
     const [watching, setWatching] = useState(false);
 
-  return (
-        <div className='single-video' style={{ backgroundImage: "url(" + video?.backgroundImage.url + ")" }} onClick={() => watching ? setWatching(false) : null}>
-            {!watching && <div className="background"></div>}
-            {!watching && <div className="info">
-                <h3>{video?.tags.join(', ')}</h3>
-                <h1>{video.title}</h1>
-                <p>{video.description}</p>
-                <a className="video-overlay" onClick={() => {
-                    changeToSeen(video?.slug)
-                    watching ? setWatching(false) : setWatching(true)
-                }}>Play the trailer</a>
-                <a href="/" className='go-back'>Go back</a><br/>
-            </div> }
-            {watching && (
-                <video width="100%" controls autoPlay className="video">
-                    <source src={video?.mp4.url} type="video/mp4" />
-                </video>
-            )}
-            <div className="info-footer" >
-                
+    return (
+            <div className='single-video' style={{ backgroundImage: "url(" + video?.backgroundImage.url + ")" }} onClick={() => watching ? setWatching(false) : null}>
+                {!watching && <div className="background"></div>}
+                {!watching && <div className="info">
+                    <h3>{video?.tags.join(', ')}</h3>
+                    <h1>{video.title}</h1>
+                    <p>{video.description}</p>
+                    <a className="video-overlay" onClick={() => {
+                        watching ? setWatching(false) : setWatching(true)
+                    }}>Play the trailer</a>
+                    <Link href="/" className='go-back'>Go back</Link>
+                </div> }
+                {watching && (
+                    <video width="100%" controls autoPlay className="video">
+                        <source src={video?.mp4.url} type="video/mp4" />
+                    </video>
+                )}
             </div>
-        </div>
-    )
+        )
 }
 
 export default Video

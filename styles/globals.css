@@ -7,7 +7,6 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #13151f;
   color: white;
-  padding-bottom: 30px;
 }
 
 a {
@@ -48,7 +47,7 @@ a {
 }
 
 .main-video{
-  width:90%;
+  width: 90%;
   max-width: 1200px;
   margin: 50px auto;
   position: relative;
@@ -243,6 +242,7 @@ a {
   width: 170px;
   height: 50px;
   margin-top: 20px;
+  margin-right: 10px;
   background: #d62828;
   color: white;
   border-radius: 30px;
